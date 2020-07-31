@@ -29,7 +29,6 @@ output$ui_data <- renderUI({
             )
           )
         ),
-        conditionalPanel("input.tabs_data == 'Manage'", uiOutput("ui_Manage")),
         conditionalPanel("input.tabs_data == 'View'", uiOutput("ui_View")),
         conditionalPanel("input.tabs_data == 'Visualize'", uiOutput("ui_Visualize")),
         conditionalPanel("input.tabs_data == 'Pivot'", uiOutput("ui_Pivotr")),
@@ -39,18 +38,6 @@ output$ui_data <- renderUI({
       ),
       mainPanel(
         tabsetPanel(id = "tabs_data",
-          tabPanel("Manage",
-            conditionalPanel("input.dman_preview == 'preview'", h2("Data preview"), htmlOutput("man_example")),
-            conditionalPanel("input.dman_preview == 'str'", h2("Data structure"), verbatimTextOutput("man_str")),
-            # conditionalPanel("input.dman_preview == 'summary'", h2("Data summary"), htmlOutput("man_summary")),
-            conditionalPanel("input.dman_preview == 'summary'", h2("Data summary"), verbatimTextOutput("man_summary")),
-            conditionalPanel(condition = "input.man_show_log == true",
-              h2("Data load and save commands"),
-              uiOutput("ui_man_log")
-            ),
-            conditionalPanel("input.man_add_descr == false", uiOutput("man_descr_html")),
-            conditionalPanel("input.man_add_descr == true", uiOutput("man_descr_md"))
-          ),
           tabPanel("View",
             download_link("dl_view_tab"),
             DT::dataTableOutput("dataviewer")
